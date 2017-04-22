@@ -1,0 +1,1375 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-ink-docstrap/node_modules/ink-docstrap/Gruntfile.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-ink-docstrap">npmtest-ink-docstrap (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-ink-docstrap/node_modules/ink-docstrap/Gruntfile.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">6% <small>(6 / 100)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">6.25% <small>(6 / 96)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> » <a href="index.html">node-npmtest-ink-docstrap/node_modules/ink-docstrap/</a> » Gruntfile.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+/**
+ * @fileOverview Gruntfile tasks. These tasks are intended to help you when modifying the template. If you are
+ * just using the template, don't sweat this stuff. To use these tasks, you must install grunt, if you haven't already,
+ * and install the dependencies. All of this requires node.js, of course.
+ *
+ * Install grunt:
+ *
+ *      npm install -g grunt-cli
+ *
+ * Then in the directory where you found this file:
+ *
+ *      npm install
+ *
+ * And you are all set. See the individual tasks for details.
+ *
+ * @module Gruntfile
+ * @requires path
+ * @requires lodash
+ * @requires http
+ * @requires async
+ * @requires fs
+ */
+var path = require( "path" );
+var _ = require( "lodash" );
+<span class="cstat-no" title="statement not covered">var request = require('request');</span>
+<span class="cstat-no" title="statement not covered">var async = require( "async" );</span>
+<span class="cstat-no" title="statement not covered">var fs = require( "fs" );</span>
+&nbsp;
+// this rather odd arrangement of composing tasks like this to make sure this works on both
+// windows and linux correctly. We can't depend on Grunt or Node to normalize
+// paths for us because we shell out to make this work. So we gather up
+// our relative paths here, normalize them later and then pass them into
+// the shell to be run by JSDoc3.
+&nbsp;
+/**
+ * The definition to run the development test files. This runs the files in `fixtures` with the
+ * project's `conf.json` file.
+ * @private
+ */
+<span class="cstat-no" title="statement not covered">var jsdocTestPages = {</span>
+	dest      : "./testdocs",
+	tutorials : "./fixtures/tutorials",
+	template  : "./template",
+	config    : "./fixtures/testdocs.conf.json",
+	options   : " --lenient --verbose --recurse"
+};
+/**
+ * The definition to run the sample files. This runs the files in `fixtures` with the
+ * sample's `conf.json` file. No task directly exposes this configuration. The `fixtures` task
+ * modifies this for each swatch it finds and then run the docs command against it.
+ * @private
+ */
+<span class="cstat-no" title="statement not covered">var jsdocExamplePages = {</span>
+	src       : ["./fixtures/", "./README.md"],
+	dest      : "./themes",
+	tutorials : "./fixtures/tutorials",
+	template  : "./template",
+	config    : "./fixtures/example.conf.json",
+	options   : " --lenient --verbose --recurse"
+};
+&nbsp;
+/**
+ * This definition provides the project's main, published documentation.
+ *  @private
+ */
+<span class="cstat-no" title="statement not covered">var projectDocs = {</span>
+	src       : ["./Gruntfile.js", "./README.md", "./template/publish.js"],
+	dest      : "./dox",
+	tutorials : "",
+	template  : "./template",
+	config    : "./template/jsdoc.conf.json",
+	options   : " --lenient --verbose --recurse --private"
+};
+&nbsp;
+/**
+ * Normalizes all paths from a JSDoc task definition and and returns an executable string that can be passed to the shell.
+ * @param {object} jsdoc A JSDoc definition
+ * @returns {string}
+ */
+<span class="fstat-no" title="function not covered">function jsdocCommand( jsdoc ) {</span>
+<span class="cstat-no" title="statement not covered">	var cmd = [];</span>
+<span class="cstat-no" title="statement not covered">	cmd.unshift( jsdoc.options );</span>
+<span class="cstat-no" title="statement not covered">	if ( jsdoc.tutorials.length &gt; 0 ) {</span>
+<span class="cstat-no" title="statement not covered">		cmd.push( "-u " + path.resolve( jsdoc.tutorials ) );</span>
+	}
+<span class="cstat-no" title="statement not covered">	cmd.push( "-d " + path.resolve( jsdoc.dest ) );</span>
+<span class="cstat-no" title="statement not covered">	cmd.push( "-t " + path.resolve( jsdoc.template ) );</span>
+<span class="cstat-no" title="statement not covered">	cmd.push( "-c " + path.resolve( jsdoc.config ) );</span>
+<span class="cstat-no" title="statement not covered">	_.each( jsdoc.src, <span class="fstat-no" title="function not covered">function ( src ) {</span></span>
+<span class="cstat-no" title="statement not covered">		cmd.push( path.resolve( src ) );</span>
+	} );
+<span class="cstat-no" title="statement not covered">	cmd.unshift( path.resolve( "./node_modules/jsdoc/jsdoc" ) );</span>
+<span class="cstat-no" title="statement not covered">	cmd.unshift( "node" );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	return cmd.join( " " );</span>
+}
+&nbsp;
+<span class="cstat-no" title="statement not covered">var tasks = {</span>
+	shell  : {
+		options  : {
+			stdout : true,
+			stderr : true
+		},
+		/**
+		 * TASK: Create the a documentation set for testing changes to the template
+		 * @name shell:testdocs
+		 * @memberOf module:Gruntfile
+		 */
+		testdocs : {
+			command : jsdocCommand( jsdocTestPages )
+		},
+		/**
+		 * TASK: Create project documentation
+		 * @name shell:dox
+		 * @memberOf module:Gruntfile
+		 */
+		dox      : {
+			command : jsdocCommand( projectDocs )
+		},
+		release1 : {
+			command : [
+				"touch Gruntfile.js",
+				"git add .",
+				'git commit -m "ready for release"',
+			].join( ";" )
+&nbsp;
+		},
+		release2 : {
+			command : ["npm version patch",
+				"git push",
+				"git push --tags",
+				"npm publish"
+			].join( "&amp;&amp;" )
+		}
+	},
+	jsdoc  : {
+		testdocs : {
+			src     : ['fixtures/**.js', "./README.md"],
+			jsdoc   : "./node_modules/jsdoc/jsdoc.js",
+			options : {
+				destination : './testdocs',
+				rescurse    : true,
+				"private"   : true,
+				"template"  : "./template",
+				"configure" : "./template/jsdoc.conf.json"
+			}
+		}
+	},
+	/**
+	 * TASK: The less task creates the themed css file from main.less. The file is written to the template styles
+	 * directory as site.[name of theme].css. Later the .conf file will look for the theme to apply based
+	 * on this naming convention.
+	 * @name less
+	 * @memberOf module:Gruntfile
+	 */
+	less   : {
+		dev : {
+			files : {
+				"template/static/styles/site.&lt;%= jsdocConf.templates.theme %&gt;.css" : "styles/main.less"
+			}
+		}
+	},
+	copy   : {
+		docs : {
+			files : [
+				{expand : true, cwd : "dox/", src : ['**'], dest : '../docstrap-dox/'},
+				{expand : true, cwd : "themes/", src : ['**'], dest : '../docstrap-dox/themes'}
+			]
+		}
+	},
+	uglify : {
+		template : {
+			files : {
+				'template/static/scripts/docstrap.lib.js' : [
+					'bower_components/jquery/dist/jquery.min.js',
+					'bower_components/sunlight/src/sunlight.js',
+					'bower_components/sunlight/src/lang/sunlight.xml.js',
+					'bower_components/sunlight/src/**/*.js',
+&nbsp;
+					'bower_components/jquery.scrollTo/jquery.scrollTo.min.js',
+					'bower_components/jquery.localScroll/jquery.localScroll.min.js',
+					'bower_components/bootstrap/dist/js/bootstrap.min.js'
+				]
+			}
+		}
+	}
+};
+&nbsp;
+<span class="cstat-no" title="statement not covered">module.exports = <span class="fstat-no" title="function not covered">function ( grunt ) {</span></span>
+<span class="cstat-no" title="statement not covered">	tasks.jsdocConf = grunt.file.readJSON( 'template/jsdoc.conf.json' );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	grunt.initConfig( tasks );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	grunt.loadNpmTasks( 'grunt-contrib-less' );</span>
+<span class="cstat-no" title="statement not covered">	grunt.loadNpmTasks( 'grunt-shell' );</span>
+<span class="cstat-no" title="statement not covered">	grunt.loadNpmTasks( 'grunt-contrib-copy' );</span>
+<span class="cstat-no" title="statement not covered">	grunt.loadNpmTasks( 'grunt-contrib-uglify' );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "default", ["docs"] );</span>
+&nbsp;
+	/**
+	 * Builds the project's documentation
+	 * @name docs
+	 * @memberof module:Gruntfile
+	 */
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "docs", "Create the project documentation", ["shell:dox"] );</span>
+	/**
+	 * Compile the CSS and create the project documentation
+	 * @name dev
+	 * @memberof module:Gruntfile
+	 */
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "dev", "Compile the CSS and create the project documentation", ["less", "shell:dox"] );</span>
+	/**
+	 * TASK: Builds the main less file and then generates the test documents
+	 * @name testdocs
+	 * @memberof module:Gruntfile
+	 */
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "testdocs", "Builds the main less file and then generates the test documents", ["less:dev", "shell:testdocs"] );</span>
+	/**
+	 * TASK: Builds the whole shebang. Which means creating testdocs, the bootswatch fixtures and then resetting the
+	 * styles directory.
+	 * @name build
+	 * @memberof module:Gruntfile
+	 */
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "build", "Builds the whole shebang. Which means creating testdocs, the bootswatch samples and then resetting the styles directory", ["uglify:template", "testdocs", "shell:dox", "bootswatch", "examples", "apply", "copy"] );</span>
+	/**
+	 * TASK: Applies the theme in the conf file and applies it to the styles directory.
+	 * @name apply
+	 * @memberof module:Gruntfile
+	 */
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "apply", "Applies the theme in the conf file and applies it to the styles directory", <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">		var def = {</span>
+			less          : "http://bootswatch.com/" + tasks.jsdocConf.templates.theme + "/bootswatch.less",
+			lessVariables : "http://bootswatch.com/" + tasks.jsdocConf.templates.theme + "/variables.less"
+		};
+<span class="cstat-no" title="statement not covered">		grunt.registerTask( "swatch-apply", _.partial( applyTheme, grunt, def ) );</span>
+<span class="cstat-no" title="statement not covered">		grunt.task.run( ["swatch-apply"] );</span>
+	} );
+	/**
+	 * TASK: Grab all Bootswatch themes and create css from each one based on the main.less in the styles directory. NOTE that this will
+	 * leave the last swatch downloaded in the styles directory, you will want to call "apply" afterwards
+	 * @name bootswatch
+	 * @memberof module:Gruntfile
+	 */
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "bootswatch", "Grab all Bootswatch themes and create css from each one based on the main.less in the styles directory", <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">		var toRun = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		var done = this.async();</span>
+<span class="cstat-no" title="statement not covered">		getBootSwatchList( <span class="fstat-no" title="function not covered">function ( err, list ) {</span></span>
+<span class="cstat-no" title="statement not covered">			if ( err ) {<span class="cstat-no" title="statement not covered">return done( err );}</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">			_.each( list.themes, <span class="fstat-no" title="function not covered">function ( entry ) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">				toRun.push( "swatch" + entry.name );</span>
+<span class="cstat-no" title="statement not covered">				grunt.registerTask( "swatch" + entry.name, _.partial( applyTheme, grunt, entry ) );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">				var key = "template/static/styles/site." + entry.name.toLowerCase() + ".css";</span>
+<span class="cstat-no" title="statement not covered">				var def = {};</span>
+<span class="cstat-no" title="statement not covered">				def[key] = "styles/main.less";</span>
+<span class="cstat-no" title="statement not covered">				tasks.less["swatch" + entry.name] = {</span>
+					files : def
+				};
+<span class="cstat-no" title="statement not covered">				toRun.push( "less:swatch" + entry.name );</span>
+			} );
+<span class="cstat-no" title="statement not covered">			grunt.task.run( toRun );</span>
+<span class="cstat-no" title="statement not covered">			done();</span>
+		} );
+&nbsp;
+	} );
+	/**
+	 * TASK:Create fixtures from the themes. The files must have been built first from the bootswatch task.
+	 * @name examples
+	 * @memberof module:Gruntfile
+	 */
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "examples", "Create samples from the themes", <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">		var toRun = [];</span>
+<span class="cstat-no" title="statement not covered">		var done = this.async();</span>
+<span class="cstat-no" title="statement not covered">		getBootSwatchList( <span class="fstat-no" title="function not covered">function ( err, list ) {</span></span>
+<span class="cstat-no" title="statement not covered">			if ( err ) {<span class="cstat-no" title="statement not covered">return done( err );}</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">			_.each( list.themes, <span class="fstat-no" title="function not covered">function ( entry ) {</span></span>
+<span class="cstat-no" title="statement not covered">				var conf = grunt.file.readJSON( './fixtures/example.conf.json' );</span>
+<span class="cstat-no" title="statement not covered">				conf.templates.theme = entry.name.toLowerCase();</span>
+<span class="cstat-no" title="statement not covered">				grunt.file.write( "tmp/example.conf." + conf.templates.theme + ".json", JSON.stringify( conf, null, 4 ) );</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">				var jsdenv = _.cloneDeep( jsdocExamplePages );</span>
+<span class="cstat-no" title="statement not covered">				jsdenv.config = "./tmp/example.conf." + conf.templates.theme + ".json";</span>
+<span class="cstat-no" title="statement not covered">				jsdenv.dest = "./themes/" + conf.templates.theme;</span>
+<span class="cstat-no" title="statement not covered">				tasks.shell["example" + conf.templates.theme] = {</span>
+					command : jsdocCommand( jsdenv )
+				};
+<span class="cstat-no" title="statement not covered">				toRun.push( "shell:example" + conf.templates.theme );</span>
+			} );
+&nbsp;
+<span class="cstat-no" title="statement not covered">			grunt.registerTask( "cleanup", "", <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">				grunt.file["delete"]( "tmp/" );</span>
+			} );
+<span class="cstat-no" title="statement not covered">			toRun.push( "cleanup" );</span>
+<span class="cstat-no" title="statement not covered">			grunt.task.run( toRun );</span>
+<span class="cstat-no" title="statement not covered">			done();</span>
+		} );
+&nbsp;
+	} );
+&nbsp;
+<span class="cstat-no" title="statement not covered">	grunt.registerTask( "release", "Create the project documentation", ["shell:release1", "shell:release2"] );</span>
+};
+&nbsp;
+/**
+ * Applies one of the Bootswatch themes to the working `styles` directory. When you want to modify a particular theme, this where you
+ * get the basis for it. The files are written to `./styles/variables.less` and `./styles/bootswatch.less`. The `./styles/main.less`
+ * file includes them directly, so after you apply the theme, modify `main.less` to your heart's content and then run the `less` task
+ * as in
+ *
+ *      grunt less
+ *
+ * @param {object} grunt The grunt object reference
+ * @param {object} definition The swatch definition files
+ * @param {string} definition.less The url to the `bootswatch.less` file
+ * @param {string} definition.lessVariables The url to the `variables.less` file
+ * @private
+ */
+<span class="fstat-no" title="function not covered">function applyTheme( grunt, definition ) {</span>
+	//noinspection JSHint
+&nbsp;
+<span class="cstat-no" title="statement not covered">	var webProtocol = tasks.jsdocConf.templates.protocol || "//";</span>
+<span class="cstat-no" title="statement not covered">	var done = this.async();</span>
+<span class="cstat-no" title="statement not covered">	async.waterfall( [</span>
+<span class="fstat-no" title="function not covered">		function ( cb ) {</span>
+<span class="cstat-no" title="statement not covered">			getBootSwatchComponent( definition.less, <span class="fstat-no" title="function not covered">function ( err, swatch ) {</span></span>
+<span class="cstat-no" title="statement not covered">				if ( err ) {<span class="cstat-no" title="statement not covered">return cb( err );}</span></span>
+<span class="cstat-no" title="statement not covered">				var fullPath = path.join( __dirname, "styles/bootswatch.less" );</span>
+<span class="cstat-no" title="statement not covered">				fs.writeFile( fullPath, swatch.replace( "http://", webProtocol ), cb );</span>
+			} );
+		},
+<span class="fstat-no" title="function not covered">		function ( cb ) {</span>
+<span class="cstat-no" title="statement not covered">			getBootSwatchComponent( definition.lessVariables, <span class="fstat-no" title="function not covered">function ( err, swatch ) {</span></span>
+<span class="cstat-no" title="statement not covered">				if ( err ) {<span class="cstat-no" title="statement not covered">return cb( err );}</span></span>
+<span class="cstat-no" title="statement not covered">				var fullPath = path.join( __dirname, "styles/variables.less" );</span>
+<span class="cstat-no" title="statement not covered">				fs.writeFile( fullPath, swatch.replace( "http://", webProtocol ), cb );</span>
+			} );
+		}
+	], done );
+}
+&nbsp;
+/**
+ * Gets the list of available Bootswatches from, well, Bootswatch.
+ *
+ * @see http://news.bootswatch.com/post/22193315172/bootswatch-api
+ * @param {function(err, responseBody)} done The callback when complete
+ * @param {?object} done.err If an error occurred, you will find it here.
+ * @param {object} done.responseBody This is a parsed edition of the bootswatch server's response. It's format it defined
+ * by the return message from [here](http://api.bootswatch.com/)
+ * @private
+ */
+<span class="fstat-no" title="function not covered">function getBootSwatchList( done ) {</span>
+<span class="cstat-no" title="statement not covered">	request('http://api.bootswatch.com/3/', <span class="fstat-no" title="function not covered">function(error, response, body) {</span></span>
+<span class="cstat-no" title="statement not covered">		if (error) {</span>
+<span class="cstat-no" title="statement not covered">			return done(error);</span>
+		}
+<span class="cstat-no" title="statement not covered">		done(null, JSON.parse(body));</span>
+	});
+}
+&nbsp;
+/**
+ * This method will get one of the components from Bootswatch, which is generally a `less` file or a `lessVariables` file.
+ *
+ * @see http://news.bootswatch.com/post/22193315172/bootswatch-api
+ * @param {string} url The url to retreive from
+ * @param {function(err, responseText)} done The callback when complete
+ * @param {?object} done.err If an error occurred, you will find it here.
+ * @param {string} done.responseText The body of whatever was returned
+ * @private
+ */
+<span class="fstat-no" title="function not covered">function getBootSwatchComponent( url, done ) {</span>
+<span class="cstat-no" title="statement not covered">	var body = "";</span>
+<span class="cstat-no" title="statement not covered">	var req = request(url, <span class="fstat-no" title="function not covered">function ( error, response, body ) {</span></span>
+<span class="cstat-no" title="statement not covered">		if (error) {</span>
+<span class="cstat-no" title="statement not covered">			return done(error);</span>
+		}
+<span class="cstat-no" title="statement not covered">		done(null, body);</span>
+	});
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 22 2017 14:51:25 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
